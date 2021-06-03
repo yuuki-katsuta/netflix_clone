@@ -29,6 +29,8 @@ export const Row = ({ title, fetchUrl, isLargeRow = false }: Props) => {
     fetchData()
   }, [fetchUrl])
 
+  console.log(movies)
+
   return (
     <div className="Row">
       <h2>{title}</h2>
@@ -39,7 +41,9 @@ export const Row = ({ title, fetchUrl, isLargeRow = false }: Props) => {
             key={movie.id}
             className={`Row-poster ${isLargeRow && 'Row-poster-large'}`}
             src={`${base_url}${
-              isLargeRow ? movie.poster_path : movie.backdrop_path
+              isLargeRow || !movie.backdrop_path
+                ? movie.poster_path
+                : movie.backdrop_path
             }`}
             alt={movie.name}
           />
